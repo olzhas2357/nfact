@@ -7,7 +7,11 @@
         <div class="card-body">
         <h5 class="card-title">{{card.name}}</h5>
         <p class="card-text">{{card.price}}</p>
-        <a href="#" class="btn btn-primary">Add to cart</a>
+        <form method="post" action="{% url 'add_to_cart' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Add to Cart</button>
+        </form>
         </div>
     </div>
 {% endblock %}
