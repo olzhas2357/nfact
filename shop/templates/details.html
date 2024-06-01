@@ -7,6 +7,7 @@
         <div class="card-body">
         <h5 class="card-title">{{card.name}}</h5>
         <p class="card-text">{{card.price}}</p>
+        <p class="card-text">{{card.description}}</p>
         <form method="post" action="{% url 'add_to_cart' %}">
             {% csrf_token %}
             {{ form.as_p }}
@@ -14,4 +15,5 @@
         </form>
         </div>
     </div>
+    
 {% endblock %}

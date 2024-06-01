@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 from .models import Shop, Cart, CartItem
-from .forms import AddToCartForm
+from .forms import AddToCartForm, SearchForm
 
 def home(request):
     shop = Shop.objects.all()
-    return render(request, 'home.html', {'shop': shop})
+    search_form = SearchForm()
+    return render(request, 'home.html', {'shop': shop, 'search_form': search_form})
 
 def details(request, pk):
     try:
@@ -15,6 +16,15 @@ def details(request, pk):
     
     form = AddToCartForm(initial={'product_id': card.id})
     return render(request, 'details.html', {'card': card, 'form': form})
+
+def search(request):
+    query = request.GET.get('query')
+    if query:
+        results = Shop.objects.filter(name__icontains=query)
+    else:
+        results = Shop.objects.all()
+    search_form = SearchForm()
+    return render(request, 'search_results.html', {'results': results, 'search_form': search_form})
 
 def add_to_cart(request):
     if request.method == 'POST':
@@ -38,7 +48,7 @@ def add_to_cart(request):
     return redirect('home')
 
 
-def cart_detail(request):
+def cart_detail_view(request):
     try:
         cart = Cart.objects.get(id=request.session.get('cart_id'))
     except Cart.DoesNotExist:

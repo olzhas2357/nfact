@@ -5,8 +5,9 @@
     <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success" type="submit">Search</button>
 </form>
+<h1>Search Results</h1>
 <div class="row">
-    {% for item in shop %}
+    {% for item in results %}
         <div class="col-md-4 mb-4">
             <a href="{% url 'details' item.pk %}" style="text-decoration: none; color: inherit;">
                 <div class="card" style="width: 18rem; cursor: pointer;">
@@ -16,7 +17,7 @@
                         <p class="card-text">{{ item.price }}</p>
                     </div>
                 </div>
-            </a>
+            </a>    
         </div>
     {% endfor %}
 </div>
