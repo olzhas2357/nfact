@@ -1,16 +1,15 @@
 {%extends 'base.html'%}
 
 {% block content %}
-<form class="d-flex" role="search" method="get" action="{% url 'search' %}">
-    <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success" type="submit">Search</button>
-</form>
-<h1>Search Results</h1>
+
 <div class="row">
     {% for item in results %}
         <div class="col-md-4 mb-4">
             <a href="{% url 'details' item.pk %}" style="text-decoration: none; color: inherit;">
-                <div class="card" style="width: 18rem; cursor: pointer;">
+                <div class="card" style="width: 18rem; cursor: pointer;  background-color: rgba(255,255,255,0.13); color: #ffffff; border-radius: 15px;
+                backdrop-filter: blur(10px);
+                border: 2px solid rgba(255,255,255,0.1);
+                box-shadow: 0 0 40px rgba(8,7,16,0.6);" >
                     <img src="{{ item.image }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ item.name }}</h5>
